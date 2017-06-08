@@ -1,0 +1,24 @@
+{
+  "name": "wonder-cake",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "rm -rf build/* && electron-packager --platform=linux,darwin --ignore=arduino --out=build ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xseignard/wonder-cake.git"
+  },
+  "author": "Xavier Seignard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xseignard/wonder-cake/issues"
+  },
+  "homepage": "https://github.com/xseignard/wonder-cake#readme",
+  "devDependencies": {
+    "electron": "^1.6.10",
+    "electron-packager": "^8.7.0"
+  }
+}
