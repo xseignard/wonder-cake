@@ -3,7 +3,7 @@
 #include <EthernetUdp.h>
 #include <DMD.h>
 #include <TimerOne.h>
-#include <Arial_Black_16_Extended.h>
+#include <Arial_Black_16_ISO_8859_1.h>
 
 // DMD stuff
 #define DISPLAYS_ACROSS 5
@@ -42,7 +42,7 @@ void setup() {
 	Udp.begin(localPort);
 	Timer1.initialize(2000);
 	Timer1.attachInterrupt(ScanDMD);
-	dmd.selectFont(Arial_Black_16_Extended);
+	dmd.selectFont(Arial_Black_16_ISO_8859_1);
 	// blink display to notify readiness
 	blinkDisplay();
 	delay(1000);

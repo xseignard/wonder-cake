@@ -44,5 +44,5 @@ const sendText = text => {
 };
 
 ipcMain.on('text', (event, arg) => {
-	sendText(arg);
+	sendText(arg || ' ');
 });

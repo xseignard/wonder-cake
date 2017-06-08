@@ -15,11 +15,20 @@
 			</table>
 		</div>
 		<div class="mui-container">
-			<h4>Envoyer un texte, régler la vitesse par un nombre précédé de # (de #1 à #1000)</h4>
+			<h4>Utilisation:</h4>
+			<ul>
+				<li>Envoyer un texte</li>
+				<li>Régler la vitesse par un nombre précédé de # (de #1 à #1000)</li>
+				<li>Envoyer un message vide pour effacer le texte</li>
+			</ul>
 			<div class="mui-textfield">
 				<input id="text" type="text" placeholder="entrez votre texte">
 			</div>
 			<button id="send" class="mui-btn mui-btn--raised mui-btn--accent">Envoyer!</button>
+			<div class="current-text">
+				<strong>Texte actuel: </strong>
+				<span id="current"></span>
+			</div>
 		</div>
 	</body>
 	<script type="text/javascript">

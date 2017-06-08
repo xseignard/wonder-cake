@@ -20,7 +20,7 @@ LED Panel Layout in RAM
                   ---------------------------------------- bottom right
 
  ---
- 
+
  This program is free software: you can redistribute it and/or modify it under the terms
  of the version 3 GNU General Public License as published by the Free Software Foundation.
 
@@ -147,10 +147,10 @@ class DMD
   void selectFont(const uint8_t* font);
 
   //Draw a single character
-  byte drawChar(const int bX, const int bY, const char letter, byte fgcolour, byte bgcolour);
+  byte drawChar(const int bX, const int bY, const unsigned char letter, byte fgcolour, byte bgcolour);
 
   //Find the width of a character
-  byte charWidth(const char letter);
+  byte charWidth(const unsigned char letter);
 
   //Draw a scrolling string
   void drawMarquee( const char* bChars, byte length, int left, int top, byte fgcolour, byte bgcolour);

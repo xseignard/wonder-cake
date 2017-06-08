@@ -1,3 +1,4 @@
 node_modules
 .pioenvs
 build
+.DS_Store

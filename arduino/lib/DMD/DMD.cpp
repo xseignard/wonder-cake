@@ -49,11 +49,11 @@ DMD::DMD(byte panelsWide, byte panelsHigh, byte panelsBPP)
     SPI.setDataMode(SPI_MODE0);	// CPOL=0, CPHA=0
     SPI.setClockDivider(SPI_CLOCK_DIV2);	// system clock / 2 = 8MHz SPI CLK to shift registers
 
-    digitalWrite(PIN_DMD_A, LOW);	// 
-    digitalWrite(PIN_DMD_B, LOW);	// 
-    digitalWrite(PIN_DMD_CLK, LOW);	// 
-    digitalWrite(PIN_DMD_SCLK, LOW);	// 
-    digitalWrite(PIN_DMD_R_DATA, HIGH);	// 
+    digitalWrite(PIN_DMD_A, LOW);	//
+    digitalWrite(PIN_DMD_B, LOW);	//
+    digitalWrite(PIN_DMD_CLK, LOW);	//
+    digitalWrite(PIN_DMD_SCLK, LOW);	//
+    digitalWrite(PIN_DMD_R_DATA, HIGH);	//
     digitalWrite(PIN_DMD_nOE, LOW);	//
 
     pinMode(PIN_DMD_A, OUTPUT);	//
@@ -201,8 +201,8 @@ boolean DMD::stepMarquee(int amountX, int amountY)
 	    clearScreen(marqueeBG);
         ret=true;
     }
-    
-        
+
+
     if (marqueeOffsetY < -marqueeHeight) {
 	    marqueeOffsetY = DMD_PIXELS_DOWN * DisplaysHigh;
 	    clearScreen(marqueeBG);
@@ -466,10 +466,10 @@ void DMD::selectFont(const uint8_t * font)
 }
 
 
-byte DMD::drawChar(const int bX, const int bY, const char letter, byte fgcolour, byte bgcolour)
+byte DMD::drawChar(const int bX, const int bY, const unsigned char letter, byte fgcolour, byte bgcolour)
 {
     if (bX >= DisplayMaxX || bY >= DisplayMaxY ) return -1;
-    char c = letter;
+    unsigned char c = letter;
     uint8_t height = pgm_read_byte(this->Font + FONT_HEIGHT);
     if (c == ' ') {
 	    byte charWide = charWidth(' ');
@@ -498,7 +498,7 @@ byte DMD::drawChar(const int bX, const int bY, const char letter, byte fgcolour,
 	        index += pgm_read_byte(this->Font + FONT_WIDTH_TABLE + i);
 	    }
 	    index = index * bytes + charCount + FONT_WIDTH_TABLE;
-	    width = pgm_read_byte(this->Font + FONT_WIDTH_TABLE + c);
+	    width = pgm_read_byte(this->Font + FONT_WIDTH_TABLE + (unsigned char) c);
     }
     if (bX < -width || bY < -height) return width;
 
@@ -526,9 +526,9 @@ byte DMD::drawChar(const int bX, const int bY, const char letter, byte fgcolour,
     return width;
 }
 
-byte DMD::charWidth(const char letter)
+byte DMD::charWidth(const unsigned char letter)
 {
-    char c = letter;
+    unsigned char c = letter;
     // Space is often not included in font so use width of 'n'
     if (c == ' ') c = 'n';
     uint8_t width = 0;
@@ -570,7 +570,7 @@ void DMD::dumpPixels()
 */
 }
 
-void DMD::scrollVert(int direction, boolean wrap) 
+void DMD::scrollVert(int direction, boolean wrap)
 {
     int offset,newoffset;
     int rowsize=DisplaysTotal<<2;
@@ -725,7 +725,7 @@ boolean DMD::transition(byte frombuffer1, byte frombuffer2, byte outbuffer, byte
                     } else {
                         if (x< (step/8) ) { // left
                             outByte=b2;
-                        } else if (x> (step/8) ) { 
+                        } else if (x> (step/8) ) {
                             if (((DisplayMaxX/8)-x)<((step/8)+1)) { // right
                                 outByte=b2;
                             } else if (((DisplayMaxX/8)-x)>((step/8)+1)) {
@@ -740,11 +740,11 @@ boolean DMD::transition(byte frombuffer1, byte frombuffer2, byte outbuffer, byte
                             int mask=(1<<(off+1)) -1;
                             outByte=(b2|mask)&(b1|(~mask));
                         }
-                    } 
+                    }
                     break;
 	            case TRANS_BOX_OUT:
                     if (y>(centreY-step) && (y-DisplayMaxY<-(centreY-step))) {
-                        if (((centreX/8)-x)< ((step/8)+1)) { 
+                        if (((centreX/8)-x)< ((step/8)+1)) {
                             outByte=b2;
                             if ((x-(centreX/8)) > (step/8)) {
                                 outByte=b1;
@@ -757,25 +757,25 @@ boolean DMD::transition(byte frombuffer1, byte frombuffer2, byte outbuffer, byte
                             }
                         } else if (((centreX/8)-x)> ((step/8)+1) ) {
                             outByte=b1;
-                        } else { 
+                        } else {
                             int off=step%8;
                             int mask=(1<<(off+1)) -1;
                             outByte=(b1|mask)&(b2|(~mask));
                         }
-                    } else { 
+                    } else {
                         outByte=b1;
                     }
                     break;
 	            case TRANS_CROSS_IN:
-                    if (y>step && (y-DisplayMaxY<-step)) { 
+                    if (y>step && (y-DisplayMaxY<-step)) {
                         outByte=b1;
                     } else {
-                        if ((x < (step/8)) || ((DisplayMaxX/8)-x)<((step/8)+1) ) { 
+                        if ((x < (step/8)) || ((DisplayMaxX/8)-x)<((step/8)+1) ) {
                             outByte=b2;
-                        } else if (x > (step/8) ) { 
+                        } else if (x > (step/8) ) {
                             if (((DisplayMaxX/8)-x)>((step/8)+1)) {
                                 outByte=b1;
-                            } else { 
+                            } else {
                                 int off=step%8;
                                 int mask=(1<<(off+1)) -1;
                                 outByte=(b1|mask)&(b2|(~mask));
@@ -785,11 +785,11 @@ boolean DMD::transition(byte frombuffer1, byte frombuffer2, byte outbuffer, byte
                             int mask=(1<<(off+1)) -1;
                             outByte=(b2|mask)&(b1|(~mask));
                         }
-                    } 
+                    }
                     break;
 	            case TRANS_CROSS_OUT:
                     if (y<(centreY-step) || (y-DisplayMaxY>-(centreY-step))) {
-                        if (((centreX/8)-x)< ((step/8)+1)) { 
+                        if (((centreX/8)-x)< ((step/8)+1)) {
                             outByte=b2;
                             if ((x-(centreX/8)) > (step/8)) {
                                 outByte=b1;
@@ -802,12 +802,12 @@ boolean DMD::transition(byte frombuffer1, byte frombuffer2, byte outbuffer, byte
                             }
                         } else if (((centreX/8)-x)> ((step/8)+1) ) {
                             outByte=b1;
-                        } else { 
+                        } else {
                             int off=step%8;
                             int mask=(1<<(off+1)) -1;
                             outByte=(b1|mask)&(b2|(~mask));
                         }
-                    } else { 
+                    } else {
                         outByte=b2;
                     }
                     break;
