@@ -27,7 +27,7 @@ EthernetUDP Udp;
 
 // timing stuff
 // default interval for scrolling speed (in ms)
-long interval = 70;
+long interval = 30;
 // last time check
 long last;
 // flag to check whether a marquee is ended or not

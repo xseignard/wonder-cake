@@ -6,7 +6,7 @@ const current = document.querySelector('#current');
 
 send.onclick = () => {
 	ipcRenderer.send('text', text.value);
-	current.textContent = text.value;
+	if (!text.value.startsWith('#')) current.textContent = text.value;
 	setTimeout(() => {
 		text.value = '';
 	}, 100);
