@@ -17,8 +17,17 @@ DMD dmd(DISPLAYS_ACROSS, DISPLAYS_DOWN, DISPLAYS_BPP);
 // define a new size of max bytes of udp message
 #define UDP_TX_PACKET_MAX_SIZE 200
 
-byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-IPAddress ip(192, 168, 1, 2);
+// byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+// IPAddress ip(192, 168, 1, 2);
+
+// byte mac[] = { 0x90, 0xA2, 0xDA, 0x0F, 0x9F, 0x69 };
+// IPAddress ip(192, 168, 1, 3);
+
+byte mac[] = {0x90, 0xA2, 0xDA, 0x0F, 0xA3, 0xA7};
+IPAddress ip(192, 168, 1, 4);
+
+// byte mac[] = { 0x90, 0xA2, 0xDA, 0x0F, 0xA3, 0xA4 };
+// IPAddress ip(192, 168, 1, 5);
 
 unsigned int localPort = 8888;
 char packetBuffer[UDP_TX_PACKET_MAX_SIZE];
@@ -33,11 +42,12 @@ long last;
 // flag to check whether a marquee is ended or not
 boolean marqueeEnd = false;
 // width of the display
-int width = 32*DISPLAYS_ACROSS;
+int width = 32 * DISPLAYS_ACROSS;
 // x offset where marquee starts
 int xStartMarquee = width - 1;
 
-void setup() {
+void setup()
+{
 	Ethernet.begin(mac, ip);
 	Udp.begin(localPort);
 	Timer1.initialize(2000);
@@ -48,7 +58,8 @@ void setup() {
 	delay(1000);
 }
 
-void blinkDisplay() {
+void blinkDisplay()
+{
 	dmd.clearScreen(RED);
 	delay(500);
 	dmd.clearScreen(BLACK);
@@ -58,10 +69,12 @@ void blinkDisplay() {
 	dmd.clearScreen(BLACK);
 }
 
-void loop() {
+void loop()
+{
 	// handle incoming messages
 	int packetSize = Udp.parsePacket();
-	if (packetSize) {
+	if (packetSize)
+	{
 		// clear previous things stored in the buffer
 		memset(packetBuffer, 0, sizeof(packetBuffer));
 		Udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
@@ -71,32 +84,39 @@ void loop() {
 	moveText();
 }
 
-void handlePacket(char* text) {
+void handlePacket(char *text)
+{
 	// if char starts with a #, it's an "adjust interval" message
-	if (text[0] == '#') {
+	if (text[0] == '#')
+	{
 		// reconstruct the new interval to apply
 		char tmp[] = {text[1], text[2], text[3], text[4]};
 		// from millis to micros
 		interval = atol(tmp);
 	}
 	// else a text to display
-	else {
+	else
+	{
 		strncpy(currentText, text, sizeof(currentText));
-		width = 32*DISPLAYS_ACROSS;
+		width = 32 * DISPLAYS_ACROSS;
 		dmd.clearScreen(BLACK);
 		dmd.drawMarquee(currentText, strlen(currentText), xStartMarquee, 0, RED, BLACK);
-		if (marqueeEnd) marqueeEnd = false;
+		if (marqueeEnd)
+			marqueeEnd = false;
 		last = millis();
 	}
 }
 
-void moveText() {
+void moveText()
+{
 	long timer = millis();
-	if(timer - last > interval && !marqueeEnd) {
+	if (timer - last > interval && !marqueeEnd)
+	{
 		last = timer;
-		marqueeEnd = dmd.stepMarquee(-1,0);
-		if (marqueeEnd) {
-			width = 32*DISPLAYS_ACROSS;
+		marqueeEnd = dmd.stepMarquee(-1, 0);
+		if (marqueeEnd)
+		{
+			width = 32 * DISPLAYS_ACROSS;
 			dmd.clearScreen(BLACK);
 			dmd.drawMarquee(currentText, strlen(currentText), xStartMarquee, 0, RED, BLACK);
 			marqueeEnd = false;
@@ -104,6 +124,7 @@ void moveText() {
 	}
 }
 
-void ScanDMD() {
+void ScanDMD()
+{
 	dmd.scanDisplayBySPI();
 }

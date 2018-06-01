@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Wonder cake</title>
+		<title>Prompteurs</title>
 		<link href="./css/mui.min.css" rel="stylesheet" type="text/css" />
 		<link href="./css/index.css" rel="stylesheet" type="text/css" />
 	</head>
@@ -10,24 +10,72 @@
 		<div class="mui-appbar">
 			<table width="100%">
 				<tr style="vertical-align:middle;">
-					<td class="mui--appbar-height" align="center"><h1>Wonder Cake</h1></td>
+					<td class="mui--appbar-height" align="center"><h1>Prompteurs</h1></td>
 				</tr>
 			</table>
 		</div>
 		<div class="mui-container">
-			<h4>Utilisation:</h4>
-			<ul>
-				<li>Envoyer un texte</li>
-				<li>Régler la vitesse par un nombre précédé de # (de #1 à #1000)</li>
-				<li>Envoyer un message vide pour effacer le texte</li>
-			</ul>
-			<div class="mui-textfield">
-				<input id="text" type="text" placeholder="entrez votre texte">
+			<h4 class="usage--title">Utilisation:</h4>
+			<div class="usage">
+				<ul>
+					<li>Envoyer un texte</li>
+					<li>Régler la vitesse par un nombre précédé de # (de #1 à #1000)</li>
+					<li>Envoyer un message vide pour effacer le texte</li>
+				</ul>
+				<ul>
+					<li>Bien identifier les prompteurs</li>
+					<li>Il n'est pas nécessaire de brancher les 4 prompteurs</li>
+				</ul>
 			</div>
-			<button id="send" class="mui-btn mui-btn--raised mui-btn--accent">Envoyer!</button>
-			<div class="current-text">
-				<strong>Texte actuel: </strong>
-				<span id="current"></span>
+			<div class="list">
+				<div class="row">
+					<div class="mui-panel">
+						<h2 class="title">Prompteur 1</h1>
+						<div class="mui-textfield">
+							<input id="text1" type="text" placeholder="entrez votre texte">
+						</div>
+						<button id="send1" class="mui-btn mui-btn--raised mui-btn--accent">Envoyer!</button>
+						<div class="current-text">
+							<strong>Texte actuel: </strong>
+							<span id="current1"></span>
+						</div>
+					</div>
+					<div class="mui-panel">
+						<h2 class="title">Prompteur 2</h1>
+						<div class="mui-textfield">
+							<input id="text2" type="text" placeholder="entrez votre texte">
+						</div>
+						<button id="send2" class="mui-btn mui-btn--raised mui-btn--accent">Envoyer!</button>
+						<div class="current-text">
+							<strong>Texte actuel: </strong>
+							<span id="current2"></span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="mui-panel">
+						<h2 class="title">Prompteur 3</h1>
+						<div class="mui-textfield">
+							<input id="text3" type="text" placeholder="entrez votre texte">
+						</div>
+						<button id="send3" class="mui-btn mui-btn--raised mui-btn--accent">Envoyer!</button>
+						<div class="current-text">
+							<strong>Texte actuel: </strong>
+							<span id="current3"></span>
+						</div>
+					</div>
+					<div class="mui-panel">
+						<h2 class="title">Prompteur 4</h1>
+						<div class="mui-textfield">
+							<input id="text4" type="text" placeholder="entrez votre texte">
+						</div>
+						<button id="send4" class="mui-btn mui-btn--raised mui-btn--accent">Envoyer!</button>
+						<div class="current-text">
+							<strong>Texte actuel: </strong>
+							<span id="current4"></span>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
